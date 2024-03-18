@@ -20,6 +20,14 @@ function newQuote () {
     } else {
         authorText.textContent = quote.author; 
     }
+
+    // Check Quote length to determine text style
+    if (quote.text.length > 50) {
+        quoteText.classList.add('long-quote'); // adds a class to quote element if text is longer than 50 char
+    } else {
+        quoteText.classList.remove('long-quote'); // removes class element from quote if not longer than 50 char
+    }
+
     quoteText.textContent = quote.text;
 }
 
