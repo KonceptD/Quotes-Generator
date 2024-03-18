@@ -7,6 +7,8 @@ const newQuoteBtn = document.getElementById('new-quote');
 
 let apiQuotes = [];
 
+// TODO: Add comments to Twitter share function
+
 // Get a new Quote
 function newQuote () {
     // pick a random quote from the apiQuotes array
@@ -44,6 +46,17 @@ async function getQuotes() {
         // Catch error here
     }
 }
+
+
+// Tweet Quote
+function tweetQuote() {
+    // `` backticks here with a ? after the end to show a query parameter ('text'). Using a template string which passes in a variable which is converted into a string.
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+    window.open(twitterUrl, '_blank'); // opens the sharing function in a new window tab
+}
+
+newQuoteBtn.addEventListener('click', newQuote);
+twitterBtn.addEventListener('click', tweetQuote);
 
 // On Load
 getQuotes();
