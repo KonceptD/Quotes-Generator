@@ -3,15 +3,26 @@ const quoteText = document.getElementById('quote');
 const authorText = document.getElementById('author');
 const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
-
+const loader = document.getElementById('loader');
 
 let apiQuotes = [];
 
-// TODO: Add comments to Twitter share function
+// Show Loading
+function loading() {
+    loader.hidden = false; // Shows it
+    quoteContainer.hidden = true; // Hides it
+}
+
+// Hide Loading
+function complete() {
+    quoteContainer.hidden = false; // Shows it
+    loader.hidden = true; // Hides it
+}
 
 // Get a new Quote
 function newQuote () {
     // pick a random quote from the apiQuotes array
+    loading(); // Shows loader and lets everything else run until the 'complete' function which hides the loader and shows the quote
 
     // We need 1 quote, not the whole array so: take apiQuotes array and run a math rounding function in it. Inside that rounding, run a randoming x length of array = a number that will be used as a key to select a random quote
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)]
@@ -30,12 +41,15 @@ function newQuote () {
         quoteText.classList.remove('long-quote'); // removes class element from quote if not longer than 50 char
     }
 
+    // Set Quote, hide loader
     quoteText.textContent = quote.text;
+    complete(); // Since the text is ready, this hides the loader and now shows the quote container
 }
 
 // Get Quotes from API
 
 async function getQuotes() {
+    loading();
     const apiUrl = 'https://jacintodesign.github.io/quotes-api/data/quotes.json';
 
     try {
