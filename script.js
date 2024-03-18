@@ -13,7 +13,13 @@ function newQuote () {
 
     // We need 1 quote, not the whole array so: take apiQuotes array and run a math rounding function in it. Inside that rounding, run a randoming x length of array = a number that will be used as a key to select a random quote
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)]
-    authorText.textContent = quote.author; 
+    
+    // Check if Author field is blank and replace with 'Unknown' 
+    if (!quote.author) {
+        authorText.textContent = 'Unknown'; 
+    } else {
+        authorText.textContent = quote.author; 
+    }
     quoteText.textContent = quote.text;
 }
 
